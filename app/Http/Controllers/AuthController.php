@@ -42,11 +42,11 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        sendWaNotification::dispatch($credentials['email'].' login.');
+        // sendWaNotification::dispatch($credentials['email'].' login.');
 
         return $this->respondWithToken($token);
     }
@@ -95,9 +95,12 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'result' => [
+                'access_token' => $token,
+                'token_type' => 'bearer',
+                'expires_in' => auth()->factory()->getTTL() * 60
+            ],
+            'message' => 'Success'
         ]);
     }
 

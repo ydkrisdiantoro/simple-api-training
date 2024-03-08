@@ -35,4 +35,4 @@ Route::get('/district/{regencyId}', [WilayahController::class, 'district']);
 Route::get('/village/{districtId}', [WilayahController::class, 'village']);
 // Route::get('/student/{year?}/{count?}', [WilayahController::class, 'student']);
 
-Route::resource('/student', StudentController::class);
+Route::resource('/student', StudentController::class)->middleware('auth');

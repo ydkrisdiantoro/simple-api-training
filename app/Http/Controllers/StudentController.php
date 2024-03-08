@@ -13,7 +13,18 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Student::all();
+        $response = [
+            'result' => [],
+            'message' => 'Failed!'
+        ];
+
+        $data = Student::all();
+        if($data){
+            $response['result'] = $data;
+            $response['message'] = 'Success!';
+        }
+
+        return response()->json($response);
     }
 
     /**
@@ -29,7 +40,18 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        return Student::findOrFail($id);
+        $response = [
+            'result' => [],
+            'message' => 'Failed!'
+        ];
+
+        $data = Student::findOrFail($id);
+        if($data){
+            $response['result'] = $data;
+            $response['message'] = 'Success!';
+        }
+
+        return response()->json($response);
     }
 
     /**
