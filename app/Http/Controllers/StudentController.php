@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentCreateRequest;
+use App\Http\Requests\StudentUpdateRequest;
 use App\Models\Student;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -18,7 +19,7 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StudentCreateRequest $request)
     {
         return Student::create($request->all());
     }
@@ -34,7 +35,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StudentUpdateRequest $request, string $id)
     {
         return Student::find($id)->update($request->all());
     }

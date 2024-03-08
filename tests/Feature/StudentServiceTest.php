@@ -42,7 +42,7 @@ class StudentServiceTest extends TestCase
      */
     public function test_user_can_read_student()
     {
-        $student = Student::first();
+        $student = Student::factory(1)->create()->first();
         $response = $this->get('/api/student/'.$student->id);
         $response->assertStatus(200);
     }
@@ -52,7 +52,7 @@ class StudentServiceTest extends TestCase
      */
     public function test_user_cant_read_student_not_exists()
     {
-        $response = $this->get('/api/student/100000');
+        $response = $this->get('/api/student/10000000');
         $response->assertStatus(404);
     }
 
@@ -70,8 +70,14 @@ class StudentServiceTest extends TestCase
      */
     public function test_user_can_update_students()
     {
-        $student = Student::first();
-        $response = $this->put('/api/student/'.$student->id);
+        $student = Student::factory(1)->create()->first();
+        $response = $this->put('/api/student/'.$student->id,[
+            'name' => 'Yayan Updated',
+            'birth_date' => date('Y-m-d'),
+            'address' => 'Address updated',
+            'year_in' => date('Y'),
+            'phone' => '0811111111111',
+        ]);
         $response->assertStatus(200);
     }
 
@@ -80,7 +86,7 @@ class StudentServiceTest extends TestCase
      */
     public function test_user_can_delete_students()
     {
-        $student = Student::first();
+        $student = Student::factory(1)->create()->first();
         $response = $this->delete('/api/student/'.$student->id);
         $response->assertStatus(204);
     }
