@@ -29,7 +29,7 @@ class StudentServiceTest extends TestCase
     /**
      * Create
      */
-    public function test_user_can_create_students()
+    public function test_user_can_create_student()
     {
         $payload = [
             'name' => 'Yayan',
@@ -102,7 +102,7 @@ class StudentServiceTest extends TestCase
     /**
      * Update
      */
-    public function test_user_can_update_students()
+    public function test_user_can_update_student()
     {
         $student = Student::factory(1)->create()->first();
         $update = [
@@ -127,7 +127,7 @@ class StudentServiceTest extends TestCase
     /**
      * Delete
      */
-    public function test_user_can_delete_students()
+    public function test_user_can_delete_student()
     {
         $student = Student::factory(1)->create()->first();
         $response = $this->actingAs($this->acting())->delete('/api/student/'.$student->id);
